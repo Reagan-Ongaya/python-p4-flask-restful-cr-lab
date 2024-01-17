@@ -3,6 +3,13 @@
 from app import app
 from models import db, Plant
 
+
+app.app_context().push()
+
+db.create_all()
+
+Plant.query.delete()
+
 with app.app_context():
 
     Plant.query.delete()
@@ -20,6 +27,8 @@ with app.app_context():
         image="./images/zz-plant.jpg",
         price=25.98,
     )
+    
 
     db.session.add_all([aloe, zz_plant])
+
     db.session.commit()
